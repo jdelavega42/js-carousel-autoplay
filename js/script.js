@@ -22,6 +22,8 @@ const bonusArray = document.getElementsByClassName("preview");
 // autoplay
 let direction = true;
 let autoplay;
+document.querySelector(".content").addEventListener("mouseover", mouseOver);
+document.querySelector(".content").addEventListener("mouseout", startAutoplay);
 startAutoplay();
 
 // set default active class to  a single picture element
@@ -76,3 +78,11 @@ function startAutoplay (){
         autoplay = setInterval(clickUp, 3000);
     }
 }
+function mouseOver(){
+    clearInterval(autoplay);
+} 
+function mouseOut(){
+    startAutoplay();
+}
+
+
