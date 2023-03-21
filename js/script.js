@@ -18,21 +18,35 @@ sidebar.innerHTML = sidebarElement;
 // get picture element
 const itemsArray = document.getElementsByClassName("picture");
 const bonusArray = document.getElementsByClassName("preview");
+
+// autoplay
+let direction = true;
+let autoplay;
+startAutoplay();
+
 // set default active class to  a single picture element
 let activePictureIndex = 0;
 itemsArray[activePictureIndex].classList.add("active");
 bonusArray[activePictureIndex].classList.add("active-thumbnails");
 
-// autoplay
-const autoplay = setInterval(clickDown, 3000);
 // change picture on click
-chevronDown.addEventListener("click", clickDown)
-chevronUp.addEventListener("click", clickUp)
+chevronDown.addEventListener("click", function(){
+    clearInterval(autoplay);
+    clickDown();
+    direction = true;
+    startAutoplay();
+})
+chevronUp.addEventListener("click", function(){
+    clearInterval(autoplay);
+    clickUp();
+    direction = false;
+    startAutoplay();
+})
 
 function clickDown (){
     itemsArray[activePictureIndex].classList.remove("active");
     bonusArray[activePictureIndex].classList.remove("active-thumbnails");
-
+    
     if(activePictureIndex === itemsArray.length - 1){
         activePictureIndex = 0;
     } else {
@@ -53,4 +67,12 @@ function clickUp (){
     }
     itemsArray[activePictureIndex].classList.add("active");
     bonusArray[activePictureIndex].classList.add("active-thumbnails");
+}
+
+function startAutoplay (){
+    if (direction === true){
+         autoplay = setInterval(clickDown, 3000);
+    } else {
+        autoplay = setInterval(clickUp, 3000);
+    }
 }
