@@ -20,12 +20,16 @@ const itemsArray = document.getElementsByClassName("picture");
 const bonusArray = document.getElementsByClassName("preview");
 // set default active class to  a single picture element
 let activePictureIndex = 0;
-console.log(itemsArray[activePictureIndex]);
 itemsArray[activePictureIndex].classList.add("active");
 bonusArray[activePictureIndex].classList.add("active-thumbnails");
 
+// autoplay
+const autoplay = setInterval(clickDown, 3000);
 // change picture on click
-chevronDown.addEventListener("click", function(){
+chevronDown.addEventListener("click", clickDown)
+chevronUp.addEventListener("click", clickUp)
+
+function clickDown (){
     itemsArray[activePictureIndex].classList.remove("active");
     bonusArray[activePictureIndex].classList.remove("active-thumbnails");
 
@@ -36,9 +40,9 @@ chevronDown.addEventListener("click", function(){
     }
     itemsArray[activePictureIndex].classList.add("active");
     bonusArray[activePictureIndex].classList.add("active-thumbnails");
+}
 
-})
-chevronUp.addEventListener("click", function(){
+function clickUp (){
     itemsArray[activePictureIndex].classList.remove("active");
     bonusArray[activePictureIndex].classList.remove("active-thumbnails");
 
@@ -49,4 +53,4 @@ chevronUp.addEventListener("click", function(){
     }
     itemsArray[activePictureIndex].classList.add("active");
     bonusArray[activePictureIndex].classList.add("active-thumbnails");
-})
+}
